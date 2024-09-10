@@ -30,6 +30,22 @@ const playRound = (humanChoice, computerChoice) => {
   console.log(`Human score: ${humanScore}, computer score: ${computerScore}`);
 };
 
+const declareWinner = () => {
+  if (humanScore > computerScore) {
+    alert(
+      `You Win ✨! Final scores- You: ${humanScore}, Computer:${computerScore}`
+    );
+  } else if (humanScore === computerScore) {
+    alert(
+      `It's a tie 🤝! Final scores- You: ${humanScore}, Computer:${computerScore}`
+    );
+  } else {
+    alert(
+      `You lose 👻! Final scores- You: ${humanScore}, Computer:${computerScore}`
+    );
+  }
+};
+
 for (let i = 0; i < 5; i++) {
   const computerSelection = getComputerChoice(string);
   const humanSelection = getHumanChoice();
@@ -37,6 +53,4 @@ for (let i = 0; i < 5; i++) {
   playRound(humanSelection, computerSelection);
 }
 
-console.log(
-  `What a game! Final scores- You: ${humanScore}, Computer:${computerScore}`
-);
+declareWinner();
