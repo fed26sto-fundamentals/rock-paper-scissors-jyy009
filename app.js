@@ -3,50 +3,40 @@ const string = ["rock", "paper", "scissor"];
 const getComputerChoice = (arr) => {
   return string[Math.floor(Math.random() * string.length)];
 };
-// console.log(getComputerChoice(string));
 
 const getHumanChoice = () => {
   return prompt(
     "Rock, paper or scissor? Enter your choice ✊🖐️✌️"
   ).toLowerCase();
 };
-// console.log(getHumanChoice());
 
 let humanScore = 0;
 let computerScore = 0;
 
-
-const playRound = (humanChoice, computerChoice, humanScore, computerScore) => {
+const playRound = (humanChoice, computerChoice) => {
   if (humanChoice === computerChoice) {
     alert("It's a tie! Try again 🎀");
-  } else if (humanChoice === "rock" && computerChoice === "scissor") {
-    alert("You win 🥇 Rock beats Scissor");
+  } else if (
+    (humanChoice === "rock" && computerChoice === "scissor") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissor" && computerChoice === "paper")
+  ) {
+    alert(`You win 🥇 ${humanChoice} beats ${computerChoice}`);
     humanScore++;
-    return console.log("human score:", humanScore);
-  } else if (humanChoice === "rock" && computerChoice === "paper") {
-    alert("You lose 👻 Paper beats Rock");
-    computerScore++;
-    return console.log("comp score:", computerScore);
-  } else if (humanChoice === "paper" && computerChoice === "scissor") {
-    alert("You lose 👻 Scissor beats Paper");
-    computerScore++;
-    return console.log("comp score:", computerScore);
-  } else if (humanChoice === "paper" && computerChoice === "rock") {
-    alert("You win 🥇 Paper beats Rock");
-    humanScore++;
-    return console.log("human score:", humanScore);
-  } else if (humanChoice === "scissor" && computerChoice === "rock") {
-    alert("You lose 👻 Rock beats Scissor");
-    computerScore++;
-    return console.log("comp score:", computerScore);
   } else {
-    alert("You win 🥇 Scissor beats Paper");
-    humanScore++;
-    return console.log("human score:", humanScore);
+    alert(`You lose 👻 ${computerChoice} beats ${humanChoice}`);
+    computerScore++;
   }
+  console.log(`Human score: ${humanScore}, computer score: ${computerScore}`);
 };
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+for (let i = 0; i < 5; i++) {
+  const computerSelection = getComputerChoice(string);
+  const humanSelection = getHumanChoice();
 
-playRound(humanSelection, computerSelection, humanScore, computerScore);
+  playRound(humanSelection, computerSelection);
+}
+
+console.log(
+  `What a game! Final scores- You: ${humanScore}, Computer:${computerScore}`
+);
